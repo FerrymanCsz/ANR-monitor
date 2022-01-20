@@ -25,6 +25,7 @@ public class TimeConsumingMonitorViewHolder extends RecyclerView.ViewHolder{
         }
 
         public void parse(MessageInfo messageInfo) {
+            //通过
             itemView.setBackgroundResource(getItemBg(messageInfo));
             tvMsgId.setText("msgId: ");
             if(messageInfo.boxMessages != null && messageInfo.boxMessages.size() != 0){

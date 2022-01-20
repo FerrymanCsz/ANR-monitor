@@ -43,7 +43,7 @@ public class TimeConsumingMonitorRecyclerAdapter extends RecyclerView.Adapter<Ti
 
     @Override
     public int getItemCount() {
-        return this.messageInfo.size();
+        return 0;
     }
 
 

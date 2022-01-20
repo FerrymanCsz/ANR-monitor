@@ -28,6 +28,8 @@ protected void onCreate(Bundle savedInstanceState) {
 
         messageTimeConsumingRecycler.setHasFixedSize(true);
         messageTimeConsumingRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        adapter = new TimeConsumingMonitorRecyclerAdapter();
+        messageTimeConsumingRecycler.setAdapter(adapter);
 
     }
     private void initView() {
