@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class OutComeActivity extends Activity {
 
@@ -26,7 +27,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
     private void messageTimeConsumingRecycler() {
 
-        messageTimeConsumingRecycler.setHasFixedSize(true);
+
         messageTimeConsumingRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
         adapter = new TimeConsumingMonitorRecyclerAdapter();
         messageTimeConsumingRecycler.setAdapter(adapter);

@@ -25,9 +25,10 @@ public class TimeConsumingMonitorViewHolder extends RecyclerView.ViewHolder{
         }
 
         public void parse(MessageInfo messageInfo) {
-            //通过
+            //为不同type的信息设置不同的背景
             itemView.setBackgroundResource(getItemBg(messageInfo));
             tvMsgId.setText("msgId: ");
+            //如果是一个队列，提取其中第一个msg的id
             if(messageInfo.boxMessages != null && messageInfo.boxMessages.size() != 0){
                 if(messageInfo.boxMessages.get(0) != null){
                     tvMsgId.setText("msgId: "+messageInfo.boxMessages.get(0).getMsgId());
