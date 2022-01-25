@@ -21,6 +21,7 @@ public class BoxMessage implements Serializable {
     private String callbackName;
     private int messageWhat;
     private long msgId;
+
     public int getMessageWhat() {
 
         return messageWhat;

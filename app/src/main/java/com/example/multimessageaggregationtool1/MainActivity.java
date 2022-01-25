@@ -3,7 +3,6 @@ package com.example.multimessageaggregationtool1;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
@@ -17,6 +16,7 @@ import android.view.Choreographer;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private IMainThreadSampleListener samplerManager;
     Handler mainHandler = new Handler(Looper.getMainLooper());
 
+
+//    List<MessageListInfo> mMessageList = new ArrayList<>();
+//    List<MessageInfoObject> listObject = new ArrayList<>();
+      List<MessageInfo> listObject1 = MessageInfoObject.messageList();
+      private MessageInfo tempMsg = new MessageInfo();
+//    private MessageInfoObject tempMsg = MessageInfoObject.getInstance();
 
 
 
@@ -122,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         cpuTempStartTime = SystemClock.currentThreadTimeMillis();//从设备开机到现在的时间，单位毫秒，含系统深度睡眠时间
         currentMsg = BoxMessageUtils.parseLooperStart( msg );//现在的MSG=MQ中最上层的，被LOOPER调出的MSG
         currentMsg.setMsgId( monitorMsgId );//给这个被调出的CURRENTMSG添加ID
+
         /**
          * 超过这个时间 就发生anr
          * */
@@ -187,14 +194,20 @@ public class MainActivity extends AppCompatActivity {
                 messageInfo.cpuTime = lastCpuEnd - cpuTempStartTime;
                 messageInfo.msgType = MessageInfo.MSG_TYPE_WARN;
                 messageInfo.boxMessages.add( currentMsg );
+                insertMessage();
+                listObject1.add(tempMsg);
 
 
                 boolean anr = dealt > config.getAnrTime(); //定义什么是anr：当处理时间大于配置中的ANR time时
                 if (anr) {
                     messageInfo.msgType = MessageInfo.MSG_TYPE_ANR;
+                    insertMessage();
+                    listObject1.add(tempMsg);
                     handleMsg();//开始处理
                 }else if(msgActivityThread){
                     messageInfo.msgType = MessageInfo.MSG_TYPE_ACTIVITY_THREAD_H;
+                    insertMessage();
+                    listObject1.add(tempMsg);
                     handleMsg();//开始处理
                 }
 
@@ -210,10 +223,13 @@ public class MainActivity extends AppCompatActivity {
                 messageInfo.cpuTime += lastCpuEnd - cpuTempStartTime;
                 messageInfo.count++;
                 messageInfo.msgType = MessageInfo.MSG_TYPE_INFO;
+//                insertMessage();
                 messageInfo.boxMessages.add( currentMsg );
 
                 if (messageInfo.wallTime > config.getWarnTime()) {
                     messageInfo.msgType = MessageInfo.MSG_TYPE_WARN;
+                    insertMessage();
+                    listObject1.add(tempMsg);
                     handleMsg();
                 }
             }
@@ -242,5 +258,15 @@ public class MainActivity extends AppCompatActivity {
         messageInfo = null;
     }
 
+
+
+    public MessageInfo insertMessage(){
+        tempMsg.setWallTime(messageInfo.wallTime);
+        tempMsg.setCpuTime(messageInfo.cpuTime);
+        tempMsg.setMsgType(messageInfo.msgType);
+        tempMsg.setCount(messageInfo.count);
+        return tempMsg;
+
+    }
 
 }

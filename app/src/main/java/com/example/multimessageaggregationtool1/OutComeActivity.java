@@ -29,11 +29,12 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
         messageTimeConsumingRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        adapter = new TimeConsumingMonitorRecyclerAdapter();
+        adapter = new TimeConsumingMonitorRecyclerAdapter(messageTimeConsumingRecycler);
         messageTimeConsumingRecycler.setAdapter(adapter);
 
     }
     private void initView() {
+    //将ArrayList中的所有数据传输进来？？？？
         RecyclerView recyclerView = findViewById(R.id.my_recycler);
         recyclerView.setAdapter(adapter);
 

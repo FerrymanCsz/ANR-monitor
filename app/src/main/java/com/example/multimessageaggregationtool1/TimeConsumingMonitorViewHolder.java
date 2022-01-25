@@ -12,7 +12,7 @@ public class TimeConsumingMonitorViewHolder extends RecyclerView.ViewHolder{
      */
 
 
-        private TextView tvCollectionType, tvMsgId,tvWallTime, tvCpuTime, tvCounts;
+    public TextView tvCollectionType, tvMsgId,tvWallTime, tvCpuTime, tvCounts;
 
         public TimeConsumingMonitorViewHolder(@NonNull View itemView) {
             super(itemView);

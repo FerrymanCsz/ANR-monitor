@@ -22,6 +22,7 @@ public class BoxMessageUtils {
             msgA = msg.split( "\\{" );
             msgA = msgA[1].split( "\\}" );
             boxMessage = new BoxMessage(handler,callback,what,msgA[0]);
+
         }catch (Exception e){
             e.printStackTrace();
             boxMessage = new BoxMessage();

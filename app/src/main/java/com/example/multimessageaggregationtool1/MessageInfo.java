@@ -52,6 +52,37 @@ public class MessageInfo implements Serializable {//serializable - 序列化 —
      * */
     public long messageCreateTime = SystemClock.elapsedRealtime();
 
+    public int getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(int msgType) {
+        this.msgType = msgType;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public long getWallTime() {
+        return wallTime;
+    }
+
+    public void setWallTime(long wallTime) {
+        this.wallTime = wallTime;
+    }
+
+    public long getCpuTime() {
+        return cpuTime;
+    }
+
+    public void setCpuTime(long cpuTime) {
+        this.cpuTime = cpuTime;
+    }
 
     @Override
     public String toString() {
